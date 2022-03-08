@@ -10,7 +10,7 @@ module "iks_cluster" {
 
   # Kubernetes Cluster Profile  Adjust the values as needed.
   cluster = {
-    name                = "test"
+    name                = "test_IKS"
     action              = "Unassign"
     wait_for_completion = false
     worker_nodes        = 2
@@ -24,7 +24,7 @@ module "iks_cluster" {
   # IP Pool Information (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   ip_pool = {
     use_existing = true
-    name         = "marvel-prod"
+    name         = "routable_110"
     # ip_starting_address = "10.239.21.220"
     # ip_pool_size        = "20"
     # ip_netmask          = "255.255.255.0"
@@ -35,7 +35,7 @@ module "iks_cluster" {
   # Sysconfig Policy (UI Reference NODE OS Configuration) (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   sysconfig = {
     use_existing = true
-    name         = "richfield"
+    name         = "hyerflexiks-sys-config-policy"
     # domain_name  = "rich.ciscolabs.com"
     # timezone     = "America/New_York"
     # ntp_servers  = ["10.101.128.15"]
@@ -55,8 +55,8 @@ module "iks_cluster" {
   # Version policy (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   versionPolicy = {
     useExisting    = false
-    policyName     = "1.19.15.5-test"
-    iksVersionName = "1.19.15-iks.5"
+    policyName     = "Newhyperflexk8sversion"
+    iksVersionName = "1.19.16-iks.0"
   }
 
   # Trusted Registry Policy (To create new change "use_existing" to 'false' and set "create_new' to 'true' uncomment variables and modify them to meet your needs.)
@@ -90,7 +90,7 @@ module "iks_cluster" {
     use_existing = true
     # platformType = "iwe"
     # targetName   = "falcon"
-    policyName = "marvel-prod"
+    policyName = "VMware_env"
     # description  = "Test Policy"
     # interfaces   = ["iwe-guests"]
     # vcTargetName   = optional(string)
@@ -102,31 +102,31 @@ module "iks_cluster" {
 
   # Addon Profile and Policies (To create new change "createNew" to 'true' and uncomment variables and modify them to meet your needs.)
   # This is an Optional item.  Comment or remove to not use.  Multiple addons can be configured.
-  addons = [
-    {
-      createNew       = true
-      addonPolicyName = "smm-test-cluster"
-      addonName       = "smm"
-      description     = "SMM Policy"
-      upgradeStrategy = "AlwaysReinstall"
-      installStrategy = "InstallOnly"
-      releaseVersion  = "1.7.4-cisco4-helm3"
-      overrides       = yamlencode({ "demoApplication" : { "enabled" : true } })
-    },
-    {
-      createNew       = false
-      addonPolicyName = "ccp-monitor"
-      description     = "monitor Policy"
-      # upgradeStrategy  = "AlwaysReinstall"
-      # installStrategy  = "InstallOnly"
-      releaseVersion = "0.2.61-helm3"
-    }
-  ]
+  # addons = [
+  #   {
+  #     createNew       = true
+  #     addonPolicyName = "smm-test-cluster"
+  #     addonName       = "smm"
+  #     description     = "SMM Policy"
+  #     upgradeStrategy = "AlwaysReinstall"
+  #     installStrategy = "InstallOnly"
+  #     releaseVersion  = "1.7.4-cisco4-helm3"
+  #     overrides       = yamlencode({ "demoApplication" : { "enabled" : true } })
+  #   },
+  #   {
+  #     createNew       = false
+  #     addonPolicyName = "ccp-monitor"
+  #     description     = "monitor Policy"
+  #     # upgradeStrategy  = "AlwaysReinstall"
+  #     # installStrategy  = "InstallOnly"
+  #     releaseVersion = "0.2.61-helm3"
+  #   }
+  # ]
 
   # Worker Node Instance Type (To create new change "use_existing" to 'false' and uncomment variables and modify them to meet your needs.)
   instance_type = {
     use_existing = true
-    name         = "small"
+    name         = "IKS_VM"
     # cpu          = 4
     # memory       = 16386
     # disk_size    = 40
