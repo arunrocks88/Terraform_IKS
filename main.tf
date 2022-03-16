@@ -4,13 +4,13 @@ provider "intersight" {
   endpoint  = var.endpoint
 }
 
-module "terraform-intersight-iks" {
+module "iks_cluster" {
   source  = "terraform-cisco-modules/iks/intersight//"
-  version = "~>2.3.0"
+  version = "2.1.3"
 
   # Kubernetes Cluster Profile  Adjust the values as needed.
   cluster = {
-    name                = "test_IKS"
+    name                = "Arun_IKS"
     action              = "Unassign"
     wait_for_completion = false
     worker_nodes        = 2
@@ -45,11 +45,11 @@ module "terraform-intersight-iks" {
   # Kubernetes Network CIDR (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
   k8s_network = {
     use_existing = true
-    name         = "default"
+    name         = "iks_new-network-policy"
     ######### Below are the default settings.  Change if needed. #########
-    # pod_cidr     = "100.65.0.0/16"
-    # service_cidr = "100.64.0.0/24"
-    # cni          = "Calico"
+    pod_cidr     = "100.100.0.0/16"
+    service_cidr = "100.101.0.0/24"
+    cni          = "Calico"
   }
 
   # Version policy (To create new change "use_existing" to 'false' uncomment variables and modify them to meet your needs.)
